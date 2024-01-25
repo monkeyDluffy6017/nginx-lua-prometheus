@@ -2,7 +2,6 @@
 luaunit = require('luaunit')
 rex_pcre2 = require('rex_pcre2')
 
-
 -- Simple implementation of a nginx shared dictionary
 local SimpleDict = {}
 SimpleDict.__index = SimpleDict
