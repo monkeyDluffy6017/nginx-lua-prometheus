@@ -100,7 +100,6 @@ function _M:incr(key, step, exptime)
     step = step + value.v
   end
 
-  -- error("================= levy exptime: " .. exptime)
   self.increments[key] = {v = step, t = exptime}
   return true
 end
