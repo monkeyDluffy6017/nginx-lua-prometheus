@@ -1,6 +1,3 @@
-package.path = '/home/liuwei/.luarocks/share/lua/5.1/?.lua;./?.lua;'
-package.cpath = '/home/liuwei/.luarocks/lib/lua/5.1/?.so;'
-
 -- vim: ts=2:sw=2:sts=2:expandtab
 luaunit = require('luaunit')
 rex_pcre2 = require('rex_pcre2')
