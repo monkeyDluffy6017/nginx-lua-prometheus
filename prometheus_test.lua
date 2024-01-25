@@ -63,6 +63,17 @@ function SimpleDict:expire(k, exptime)
   end
   self.dict[k]["expired"] = os.time() + exptime
 end
+function SimpleDict:ttl(k)
+  self:get(k)
+  if not self.dict[k] then
+    return nil, "not found"
+  end
+  if self.dict[k]["expired"] then
+    return self.dict[k]["expired"] - os.time()
+  else
+    return 0
+  end
+end
 
 local function sleep(n)
   local t0 = os.time()

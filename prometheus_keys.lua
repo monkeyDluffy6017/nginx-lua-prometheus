@@ -17,7 +17,7 @@ function KeyIndex.new(shared_dict, prefix)
   self.key_count = prefix .. "key_count"
   self.last = 0
   self.deleted = 0
-  self.expired_max_index = 2
+  self.not_expired_index = 1
   self.keys = {}
   self.index = {}
   return self
@@ -57,19 +57,29 @@ function KeyIndex:sync_range(first, last)
 end
 
 function KeyIndex:sync_expired(N)
-  local first = self.expired_max_index
+  local first = self.not_expired_index
   --- the key is sorted by created time, so the key will expire in order
   for i = first, N do
+    self.not_expired_index = i
     -- Read i-th key. If it is nil, it means it was expired
-    local key = self.dict:get(self.key_prefix .. i)
-    if key then
-      break
-    elseif self.keys[i] then
-      -- we don't need to update self.delete_count and self.key_count
-      self.index[self.keys[i]] = nil
-      self.keys[i] = nil
-      self.expired_max_index = i
+    local ttl, err = self.dict:ttl(self.key_prefix .. i)
+    if ttl then
+      if ttl == 0 then
+        goto CONTINUE
+      else
+        break
+      end
+    else
+      if err ~= "not found" then
+        break
+      end
+      if self.keys[i] then
+        -- we don't need to update self.delete_count and self.key_count
+        self.index[self.keys[i]] = nil
+        self.keys[i] = nil
+      end
     end
+    ::CONTINUE::
     ngx_sleep(0)
   end
 end
