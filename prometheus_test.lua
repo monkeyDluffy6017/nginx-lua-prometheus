@@ -902,7 +902,7 @@ function TestPrometheus:testKeyTimeout()
 
   self.gauge_exp:inc(1)
   luaunit.assertEquals(self.dict:get("gauge_exp"), 1)
-  local i = self.p.key_index.index["gauge_exp"]
+  i = self.p.key_index.index["gauge_exp"]
   luaunit.assertEquals(self.dict:get("__ngx_prom__key_" .. i), "gauge_exp")
   luaunit.assertEquals(self.p.key_index.keys[i], "gauge_exp")
 
@@ -916,7 +916,7 @@ function TestPrometheus:testKeyTimeout()
   self.gauge_exp_2:set(1)
   self.p.key_index:sync()
   luaunit.assertEquals(self.dict:get("gauge_exp_2"), 1)
-  local i = self.p.key_index.index["gauge_exp_2"]
+  i = self.p.key_index.index["gauge_exp_2"]
   luaunit.assertEquals(self.dict:get("__ngx_prom__key_" .. i), "gauge_exp_2")
   luaunit.assertEquals(self.p.key_index.keys[i], "gauge_exp_2")
 
