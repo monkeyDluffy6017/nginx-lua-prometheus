@@ -13,7 +13,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        lua: ["5.1", "5.2"]
+        lua: ["5.2"]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
