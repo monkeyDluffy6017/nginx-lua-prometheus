@@ -51,7 +51,6 @@ function KeyIndex:sync_range(first, last)
       self.index[self.keys[i]] = nil
       self.keys[i] = nil
     end
-    ngx_sleep(0)
   end
   self.last = last
 end
@@ -80,7 +79,6 @@ function KeyIndex:sync_expired(N)
       end
     end
     ::CONTINUE::
-    ngx_sleep(0)
   end
 end
 
