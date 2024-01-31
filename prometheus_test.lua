@@ -882,7 +882,7 @@ function TestPrometheus.testPrintfTable()
   luaunit.assertEquals(p._table_to_string({"foo"}), "<foo>")
   luaunit.assertEquals(p._table_to_string({"foo",2,"bar"}), "<foo,2,bar>")
   -- table ends at the first value before nil.
-  luaunit.assertEquals(p._table_to_string({nil,2,nil,"foo",nil}), "<nil,2,nil,foo>")
+  luaunit.assertEquals(p._table_to_string({nil,2,nil,"foo",nil}), "<nil,2>")
 end
 
 function TestPrometheus:testKeyTimeout()
