@@ -49,7 +49,3 @@ jobs:
           go-version: 1.14
       - run: go get
       - run: ./test.sh
-      - name: Run debugger
-        if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@v3
-        timeout-minutes: 15
